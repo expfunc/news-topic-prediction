@@ -1,3 +1,4 @@
+from preprocessing import tokenize_sentence
 import streamlit as st
 import joblib
 
@@ -17,3 +18,4 @@ if st.button("Определить тему"):
         st.success(f"Тема: **{topic}**")
     else:
         st.warning("Введите текст!")
+
