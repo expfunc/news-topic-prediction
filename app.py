@@ -21,19 +21,25 @@ st.markdown("""
 Силовые структуры, Ценности, Бизнес, Путешествия, Прочее.
 """)
 
+# Загрузка примеров
+examples = {}
+for fname in ["sport.txt", "science.txt", "home.txt"]:
+    with open(f"examples/{fname}", "r", encoding="utf-8") as f:
+        examples[fname.replace(".txt", "")] = f.read().strip()
+
 # Кнопка примеров
-with st.expander("Примеры новостей (нажмите, чтобы открыть)"):
+with st.expander("Примеры новостей"):
     st.subheader("Спорт")
     st.markdown("[Российские гребцы победили на чемпионате мира](https://lenta.ru/news/2025/08/24/rossiyskie-grebtsy-pobedili-na-chempionate-mira/)")
-    st.code("Российские гребцы победили на чемпионате мира")
+    st.code(examples["sport"])
 
     st.subheader("Наука и техника")
     st.markdown("[В Сибири нашли уникальную могилу скифского воина](https://ria.ru/20250823/nauka-2037018004.html)")
-    st.code("В Сибири нашли уникальную могилу скифского воина")
+    st.code(examples["science"])
 
     st.subheader("Дом")
     st.markdown("[Названы районы Москвы с наибольшим ростом цен на аренду жилья в июле](https://realty.rbc.ru/news/689b9b859a794779902a9375)")
-    st.code("Названы районы Москвы с наибольшим ростом цен на аренду жилья в июле")
+    st.code(examples["home"])
 
 # Поле ввода текста
 user_input = st.text_area("Вставьте текст новости:", height=150)
@@ -45,3 +51,4 @@ if st.button("Определить тему"):
         st.success(f"**Тема новости:** {topic}")
     else:
         st.warning("Введите текст для определения.")
+
