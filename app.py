@@ -34,7 +34,7 @@ with st.expander("Примеры новостей"):
     st.code(examples["sport"], language="text")
 
     st.subheader("Наука и техника")
-    st.markdown("[В Сибири нашли уникальную могилу скифского воина](https://ria.ru/20250823/nauka-2037018004.html)")
+    st.markdown("[В Туле обсудят применение технологий для борьбы с борщевиком](https://ria.ru/20250822/tula-2037062159.html)")
     st.code(examples["science"], language="text")
 
     st.subheader("Дом")
@@ -51,5 +51,6 @@ if st.button("Определить тему"):
         st.success(f"**Тема новости:** {topic}")
     else:
         st.warning("Введите текст для определения.")
+
 
 
