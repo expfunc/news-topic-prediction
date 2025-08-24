@@ -2,20 +2,46 @@ from preprocessing import tokenize_sentence
 import streamlit as st
 import joblib
 
-# загрузка
 obj = joblib.load("news_topic_svc.joblib")
 pipeline = obj["pipeline"]
 le = obj["label_encoder"]
 
-st.title("Классификация темы новости по по ее тексту")
+st.set_page_config(page_title="News Topic Classifier", layout="centered")
 
-user_input = st.text_area("Введите текст новости:", "")
+st.title("Классификация тем новостей по тексту")
+
+# Описание
+st.markdown("""
+Эта модель позволяет по тексту новости определить её тему.  
+Модель (LinearSVC) обучена на русскоязычных новостях Lenta.ru.  
+
+**Доступные темы:**  
+Россия, Мир, Экономика, Спорт, Культура, Бывший СССР,  
+Наука и техника, Интернет и СМИ, Из жизни, Дом,  
+Силовые структуры, Ценности, Бизнес, Путешествия, Прочее.
+""")
+
+# Кнопка примеров
+with st.expander("Примеры новостей (нажмите, чтобы открыть)"):
+    st.subheader("Спорт")
+    st.markdown("[Российские гребцы победили на чемпионате мира](https://lenta.ru/news/2025/08/24/rossiyskie-grebtsy-pobedili-na-chempionate-mira/)")
+    st.code("Российские гребцы победили на чемпионате мира")
+
+    st.subheader("Наука и техника")
+    st.markdown("[В Сибири нашли уникальную могилу скифского воина](https://ria.ru/20250823/nauka-2037018004.html)")
+    st.code("В Сибири нашли уникальную могилу скифского воина")
+
+    st.subheader("Дом")
+    st.markdown("[Названы районы Москвы с наибольшим ростом цен на аренду жилья в июле](https://realty.rbc.ru/news/689b9b859a794779902a9375)")
+    st.code("Названы районы Москвы с наибольшим ростом цен на аренду жилья в июле")
+
+# Поле ввода текста
+user_input = st.text_area("Вставьте текст новости:", height=150)
 
 if st.button("Определить тему"):
     if user_input.strip():
-        pred = pipeline.predict([user_input])
-        topic = le.inverse_transform(pred)[0]
-        st.success(f"Тема: **{topic}**")
+        pred = pipeline.predict([user_input])[0]
+        topic = le.inverse_transform([pred])[0]
+        st.success(f"**Тема новости:** {topic}")
     else:
-        st.warning("Введите текст!")
-
+        st.warning("Введите текст для определения.")
