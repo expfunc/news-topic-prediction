@@ -5,6 +5,8 @@
 Используется датасет новостных текстов Lenta.ru.  
 Цель: построить модель, которая по тексту статьи предсказывает её тему.
 
+Поиграться с моделью можно на [сайте](https://news-topic-prediction.streamlit.app)
+
 ## Данные
 - Источник: [Lenta.ru dataset](https://www.kaggle.com/datasets/yutkin/corpus-of-russian-news-articles-from-lenta)  
 - Основные признаки:  
